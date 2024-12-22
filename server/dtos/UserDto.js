@@ -1,0 +1,12 @@
+// այս կլասը մեջ այն դաշտերն են որը մենք կուղարկենք Client-ին
+module.exports = class UserDto {
+    email;
+    id;
+    isActivated;
+    constructor(model){
+        this.email = model.email,
+        this.id = model._id,
+        this.isActivated = model.isActivated
+    }
+
+}
