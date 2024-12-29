@@ -44,6 +44,19 @@ class UserServices {
             user: userDto
         }
     }
+
+    // activate function 
+    async activate(activationLink){
+        // Ստուգում ենք արդյոք նման լինկով user - գոյություն ունի DB-ում
+        const user = await UserModel.findOne({activationLink})
+        if(!user){
+            throw new Error('Անբարեհաջող լինկ')
+        }
+        // Եթե user-ը կա isActivated հատկությունը դարձնում ենք true
+        user.isActivated = true
+        // Պահպանում ենք փոփոխված տվյաները DB-ում
+        await user.save()
+    }
 }
 
 module.exports = new UserServices()

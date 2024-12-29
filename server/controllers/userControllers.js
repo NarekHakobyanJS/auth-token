@@ -30,9 +30,13 @@ class UserControllers {
 
     async activate(req, res, next){
         try {
-            
+            // URL պարամետրից ստանում ենք լինկը որը ուղարկում ենք Սերվիսի համանուն ֆունկցիային:
+            const activationLink = req.params.link 
+            await userServices.activate(activationLink)
+            // այս function-ից մենք user-ին redirect-ենք անում Ֆրոնտի Պորտ // օր ` 5050
+            return res.redirect(process.env.CLIENT_URL)
         } catch (error) {
-            
+            res.json(error)
         }
     }
 
